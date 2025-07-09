@@ -20,7 +20,7 @@ This is the frontend for the OCR Aadhaar reader application, built using **Vite*
 
 ```bash
 git clone https://github.com/SHIKHIL8137/Aadhar_OCR_Front-End.git
-cd ocr-frontend
+cd frontend
 ```
 
 ### 2. Install dependencies

@@ -1,69 +1,106 @@
-# React + TypeScript + Vite
+# 🌐 OCR Frontend (Vite + React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the OCR Aadhaar reader application, built using **Vite** and **React**. It interacts with the backend OCR service to upload Aadhaar card images and display the extracted information.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 📤 Upload Aadhaar front & back images
+- 🧠 Sends images to backend for OCR processing
+- 📄 Displays extracted name, DOB, gender, Aadhaar number, address, etc.
+- 🌍 CORS compatible with backend
+- ⚡ Fast dev experience with Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 Setup (Local Development)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 1. Clone the repository
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/SHIKHIL8137/Aadhar_OCR_Front-End.git
+cd ocr-frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Create a `.env` file
+
+```env
+VITE_API_BASE_URL=http://localhost:5000
+```
+
+> This should match the backend URL (especially if it runs in Docker).
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to open the app.
+
+---
+
+## 🔁 API Integration
+
+The frontend sends a `POST` request to:
+
+```ts
+POST /api/ocr
+Content-Type: multipart/form-data
+```
+
+With `frontImage` and `backImage` as form-data fields.
+
+You can use Axios like this:
+
+```ts
+const response = await axios.post(\`\${import.meta.env.VITE_API_BASE_URL}/api/ocr\`, formData);
+```
+
+---
+
+## 📦 Production Build
+
+To create a production-ready build:
+
+```bash
+npm run build
+```
+
+To locally preview the build:
+
+```bash
+npm run preview
+```
+
+---
+
+## 🚀 Deployment
+
+You can deploy this frontend easily using any static hosting service like:
+
+- Vercel (Recommended)
+- Netlify
+- Render (Static Site)
+- GitHub Pages
+
+Set your `VITE_API_BASE_URL` in the host's environment variable settings for production.
+
+---
+
+## ✍️ Author
+
+Built with ❤️ by [Shikhil K S](https://github.com/SHIKHIL8137)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
